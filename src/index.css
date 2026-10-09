@@ -1,4 +1,4 @@
-/* SIMPERPUS Digital - Modern Design System */
+/* SIMPERPUS Digital - Modern Responsive Design System */
 :root {
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -77,8 +77,8 @@ body {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -96,22 +96,17 @@ body {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.8; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.03); }
 }
 
 @keyframes floatAnim {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-5px); }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-float {
@@ -131,11 +126,11 @@ body {
 }
 
 .card-hover-effect {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .card-hover-effect:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-xl);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Button & Badge Tokens */
@@ -150,49 +145,91 @@ body {
   letter-spacing: 0.01em;
 }
 
-/* Simulator Device Styles (Mobile View Frame for UKK evaluation) */
+/* 📱 SMARTPHONE SIMULATOR FRAME STYLING FOR UKK PEMROGRAMAN MOBILE */
 .mobile-device-frame {
-  max-width: 420px;
+  max-width: 410px !important;
+  width: 100% !important;
   margin: 0 auto;
-  min-height: 850px;
-  border-radius: 44px;
-  border: 12px solid #1e293b;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255,255,255,0.1);
-  overflow: hidden;
+  height: 840px !important;
+  max-height: 92vh;
+  border-radius: 46px;
+  border: 12px solid #0f172a;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255,255,255,0.1);
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
   position: relative;
   background: var(--bg-app);
+  display: flex;
+  flex-direction: column;
 }
 
 .mobile-notch {
-  width: 140px;
-  height: 24px;
-  background-color: #1e293b;
+  width: 130px;
+  height: 22px;
+  background-color: #0f172a;
   border-bottom-left-radius: 14px;
   border-bottom-right-radius: 14px;
-  position: absolute;
+  position: sticky;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
-  z-index: 50;
+  margin: 0 auto;
+  z-index: 60;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .mobile-notch-camera {
-  width: 10px;
-  height: 10px;
-  background: #0f172a;
+  width: 9px;
+  height: 9px;
+  background: #020617;
   border-radius: 50%;
   border: 1px solid #334155;
 }
 
 .mobile-notch-speaker {
-  width: 40px;
-  height: 4px;
+  width: 36px;
+  height: 3.5px;
   background: #334155;
   border-radius: 9999px;
+}
+
+/* STRICT OVERRIDES WHEN INSIDE MOBILE SIMULATOR */
+.mobile-device-frame aside {
+  display: none !important;
+}
+
+.mobile-device-frame .grid {
+  grid-template-columns: 1fr !important;
+  gap: 0.75rem !important;
+}
+
+.mobile-device-frame .lg\:grid-cols-3,
+.mobile-device-frame .lg\:grid-cols-4,
+.mobile-device-frame .sm\:grid-cols-2,
+.mobile-device-frame .sm\:grid-cols-3,
+.mobile-device-frame .sm\:grid-cols-4 {
+  grid-template-columns: 1fr !important;
+}
+
+.mobile-device-frame .lg\:col-span-2,
+.mobile-device-frame .lg\:col-span-3 {
+  grid-column: span 1 / span 1 !important;
+}
+
+.mobile-device-frame main {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0.85rem !important;
+}
+
+.mobile-device-frame header {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+  height: auto !important;
+  min-height: 3.5rem;
 }
 
 /* Print Stylesheet for Reports and ID Cards */
@@ -202,7 +239,7 @@ body {
     color: #000000 !important;
     font-size: 12pt;
   }
-  .no-print, nav, aside, button, .device-toggle-bar, .toast-container {
+  .no-print, nav, aside, button, .mobile-notch, .toast-container {
     display: none !important;
   }
   .print-only {
@@ -215,8 +252,10 @@ body {
   }
   .mobile-device-frame {
     max-width: 100% !important;
+    height: auto !important;
     border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
+    overflow: visible !important;
   }
 }

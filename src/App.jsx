@@ -6,6 +6,7 @@ import { transactionService } from './services/transactionService';
 // Layout & Global Components
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
+import { MobileBottomNav } from './components/MobileBottomNav';
 import { Toast } from './components/Toast';
 import { ConfirmDialog } from './components/ConfirmDialog';
 
@@ -86,10 +87,10 @@ export default function App() {
     : transactions.filter((t) => t.memberNisn === currentUser?.nisn && t.status === 'Terlambat').length;
 
   return (
-    <div className={`min-h-screen ${isMobileSimulator ? 'bg-slate-200 dark:bg-slate-950 py-8 px-2' : 'bg-slate-50 dark:bg-slate-950'}`}>
-      {/* Container - Normal Desktop or Mobile Simulator Frame */}
-      <div className={isMobileSimulator ? 'mobile-device-frame flex flex-col' : 'min-h-screen flex flex-col'}>
-        {/* Notch on Mobile Simulator */}
+    <div className={`min-h-screen ${isMobileSimulator ? 'bg-slate-200 dark:bg-slate-950 py-4 sm:py-8 px-2 flex justify-center items-center' : 'bg-slate-50 dark:bg-slate-950'}`}>
+      {/* Container - Normal Desktop or Smartphone Simulator Frame */}
+      <div className={isMobileSimulator ? 'mobile-device-frame shadow-2xl' : 'min-h-screen flex flex-col'}>
+        {/* Notch on Smartphone Simulator */}
         {isMobileSimulator && (
           <div className="mobile-notch">
             <div className="mobile-notch-camera"></div>
@@ -112,10 +113,10 @@ export default function App() {
           showToast={showToast}
         />
 
-        {/* Main Content Body */}
+        {/* Main Content Area */}
         {!currentUser ? (
           /* Auth View (Login / Register) */
-          <main className="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8 flex items-center justify-center">
+          <main className="flex-1 w-full p-4 sm:p-6 lg:p-8 flex items-center justify-center">
             {authView === 'login' ? (
               <Login
                 onLoginSuccess={(usr) => {
@@ -137,18 +138,22 @@ export default function App() {
             )}
           </main>
         ) : (
-          /* Authenticated Dashboard View */
-          <div className="flex-1 flex flex-col md:flex-row max-w-7xl mx-auto w-full">
-            {/* Sidebar Navigation */}
-            <Sidebar
-              activeTab={activeTab}
-              onTabChange={(tab) => setActiveTab(tab)}
-              role={currentUser.role}
-              overdueCount={overdueCount}
-            />
+          /* Authenticated View */
+          <div className="flex-1 flex flex-col md:flex-row w-full max-w-7xl mx-auto">
+            {/* Desktop Sidebar (Only visible when NOT in mobile simulator and viewport >= md) */}
+            {!isMobileSimulator && (
+              <div className="hidden md:block">
+                <Sidebar
+                  activeTab={activeTab}
+                  onTabChange={(tab) => setActiveTab(tab)}
+                  role={currentUser.role}
+                  overdueCount={overdueCount}
+                />
+              </div>
+            )}
 
             {/* Main Application Pages */}
-            <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto max-w-5xl">
+            <main className="flex-1 p-3 sm:p-6 lg:p-8 overflow-y-auto w-full pb-20 md:pb-8">
               {currentUser.role === 'petugas' ? (
                 /* Petugas Pages */
                 <>
@@ -189,6 +194,18 @@ export default function App() {
                 </>
               )}
             </main>
+          </div>
+        )}
+
+        {/* Mobile Bottom Navigation Bar (Visible in mobile simulator OR on real mobile screens < md) */}
+        {currentUser && (
+          <div className={isMobileSimulator ? 'block' : 'block md:hidden'}>
+            <MobileBottomNav
+              activeTab={activeTab}
+              onTabChange={(tab) => setActiveTab(tab)}
+              role={currentUser.role}
+              overdueCount={overdueCount}
+            />
           </div>
         )}
 
