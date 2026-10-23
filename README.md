@@ -56,32 +56,38 @@
 ---
 
 ## 🛠️ Arsitektur & Teknologi yang Digunakan
-- **Frontend Framework**: React 19 + Vite 6
-- **Styling**: Tailwind CSS + Custom Design System (`src/index.css`)
-- **Iconography**: Lucide React
-- **Data Layer & Persistence**: Modular Service Layer (`authService`, `bookService`, `memberService`, `transactionService`, `statsService`) dengan LocalStorage Storage Engine & Relational Modeling.
-- **Documentation**: Markdown Standar UKK KM25.4.1.1 + Blackbox Testing Suite.
+- **Mobile Framework**: Flutter 3.44+ & Dart 3.12+ (Native Multi-Platform: Android, iOS, Windows Desktop, Web)
+- **Design System**: Material 3 Design System dengan HSL Tailored Color Palette & Dynamic Dark/Light Mode
+- **Persistence**: SharedPreferences Reactive Storage Layer (`StorageService`, `TransactionService`, `BookService`, `MemberService`, `StatsService`, `AuthService`)
+- **Documentation & Testing**: Unit & Widget Smoke Testing (`flutter test`), Laporan Blackbox UKK KM25.4.1.1
 
 ---
 
-## 🚀 Cara Menjalankan Proyek di Komputer Lokal
+## 🚀 Cara Menjalankan Aplikasi Mobile (Flutter & Dart)
 
 ### Prasyarat
-- **Node.js** (Versi 18+ atau lebih baru)
-- Web Browser modern (Google Chrome, Microsoft Edge, Firefox)
+- **Flutter SDK** (Versi 3.x+ / Dart 3.x+)
+- Android Studio / VS Code / Chrome / Windows SDK
 
 ### Langkah-langkah Menjalankan:
-1. Buka folder proyek di Terminal / Command Prompt:
+1. Pastikan dependensi telah terinstal:
    ```bash
-   cd c:\Users\Asus\Documents\perpus_ai
+   flutter pub get
    ```
-2. Jalankan server pengembangan lokal:
+2. Jalankan aplikasi di perangkat / emulator / browser:
    ```bash
-   npm run dev
+   # Jalankan di Android Emulator atau HP fisik
+   flutter run
+
+   # Atau jalankan di Chrome/Edge Web untuk demonstrasi instan:
+   flutter run -d chrome
+
+   # Atau jalankan sebagai aplikasi Windows Desktop:
+   flutter run -d windows
    ```
-3. Buka browser dan akses alamat:
-   ```
-   http://localhost:3000
+3. Menjalankan pengujian otomatis (Automated Unit/Widget Test):
+   ```bash
+   flutter test
    ```
 
 ---

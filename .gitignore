@@ -22,3 +22,23 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.iml
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# Android / iOS / Desktop ephemerals
+**/android/.gradle
+**/android/local.properties
+**/windows/flutter/ephemeral
+**/linux/flutter/ephemeral
+**/macos/Flutter/ephemeral
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_assets/
+
